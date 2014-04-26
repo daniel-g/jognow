@@ -1,8 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
@@ -15,6 +13,7 @@ Bundler.require(*Rails.groups)
 
 module Jobnow
   class Application < Rails::Application
+    config.mongoid.logger = Logger.new($stdout, :warn)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
