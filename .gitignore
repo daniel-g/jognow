@@ -1,0 +1,13 @@
+capybara-*.html
+.rspec
+/log
+/tmp
+/spec/tmp
+**.orig
+
+config/database.yml
+config/secrets.yml
+
+## Environment normalisation:
+/.bundle
+/vendor/bundle
