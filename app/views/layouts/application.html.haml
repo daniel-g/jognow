@@ -1,8 +1,10 @@
 %html
   %head
-    %title Jognow
+    %title JogNow
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    = yield
+    .container
+      %h1 JogNow
+      = yield
