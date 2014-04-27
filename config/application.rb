@@ -11,7 +11,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Jobnow
+module Jognow
   class Application < Rails::Application
     config.mongoid.logger = Logger.new($stdout, :warn)
     # Settings in config/environments/* take precedence over those specified here.
