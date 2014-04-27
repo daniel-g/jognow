@@ -1,0 +1,20 @@
+%div(ng-controller='timeEntriesController')
+  .row
+    %form.col-lg-12(ng-submit='create()')
+      .row
+        .form-group.col-lg-4
+          %label Distance
+          %input.form-control(type='text' placeholder='3.5 km, 400 m, etc.' ng-model='time_entry.distance')
+        .form-group.col-lg-4
+          %label Time
+          %input.form-control(type='text' placeholder='20 min, 3 hrs, 1 hr' ng-model='time_entry.time')
+      .row
+        .form-group.col-lg-8.text-right
+          %input.btn.btn-primary(type='submit' value='Save')
+
+  %ul.row
+    %li.large-12.columns(ng-repeat='time_entry in time_entries')
+      .row
+        .large-4.columns(ng-bind='time_entry.distance')
+        .large-4.columns(ng-bind='time_entry.time')
+        .large-4.columns(ng-bind='time_entry.avg_speed')

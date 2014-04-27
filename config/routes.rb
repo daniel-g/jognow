@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'times#show'
-  resources :times
+  root to: 'time_entries#show'
+  resources :time_entries
 end

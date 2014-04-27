@@ -8,10 +8,15 @@
 
 //= require_self
 //= require_tree ./angular/controllers
+//= require_tree ./angular/resources
 
 angular.module('Jognow', [
   'ngResource', 'ngAnimate', 'ngRoute','mgcrea.ngStrap'
-]);
+]).config(['$httpProvider', function($httpProvider){
+  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+}]);
+
+
 app = angular.module('Jognow');
 
 var ready = function(){
