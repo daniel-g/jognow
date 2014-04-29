@@ -9,6 +9,7 @@
 //= require_self
 //= require_tree ./angular/controllers
 //= require_tree ./angular/resources
+//= require_tree ./angular/directives
 
 angular.module('Jognow', [
   'ngResource', 'ngAnimate', 'ngRoute','mgcrea.ngStrap'

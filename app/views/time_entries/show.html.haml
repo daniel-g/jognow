@@ -1,20 +1,36 @@
 %div(ng-controller='timeEntriesController')
   .row
-    %form.col-lg-12(ng-submit='create()')
+    %form.col-lg-12(ng-submit='create()' name='form' novalidate)
       .row
-        .form-group.col-lg-4
+        .form-group.col-lg-4(ng-class="{ 'has-error': form.distance.$invalid && submitted }")
           %label Distance
-          %input.form-control(type='text' placeholder='3.5 km, 400 m, etc.' ng-model='time_entry.distance')
-        .form-group.col-lg-4
+          %input.form-control(type='text' placeholder='3.5km, 400m, etc.' ng-model='timeEntry.distance' name='distance' distance required)
+          %span.help-block(ng-show='form.distance.$error.required && submitted')
+            Please fill out this field
+          %span.help-block(ng-show='form.distance.$error.distance && submitted')
+            This is not a valid distance. It should contain a valid number followed by a valid measure unit: km for kilometers or m for meters: 3km, 3.5km, 400m, 120m
+        .form-group.col-lg-4(ng-class="{ 'has-error': form.time.$invalid && submitted }")
           %label Time
-          %input.form-control(type='text' placeholder='20 min, 3 hrs, 1 hr' ng-model='time_entry.time')
+          %input.form-control(type='text' placeholder='20 min, 3 hrs, 1 hr' ng-model='timeEntry.time' name='time' required time)
+          %span.help-block(ng-show='form.time.$error.required && submitted')
+            Please fill out this field
+          %span.help-block(ng-show='form.time.$error.time && submitted')
+            This is not a valid time. It should contain a valid number followed by a valid time unit: hrs, hours, m, minutes
       .row
         .form-group.col-lg-8.text-right
           %input.btn.btn-primary(type='submit' value='Save')
 
   %ul.row
-    %li.large-12.columns(ng-repeat='time_entry in time_entries')
+    %li.col-lg-12
       .row
-        .large-4.columns(ng-bind='time_entry.distance')
-        .large-4.columns(ng-bind='time_entry.time')
-        .large-4.columns(ng-bind='time_entry.avg_speed')
+        .col-lg-2
+          %strong Distance
+        .col-lg-2
+          %strong Time
+        .col-lg-2
+          %strong Average Speed
+    %li.col-lg-12(ng-repeat='timeEntry in timeEntries')
+      .row
+        .col-lg-2(ng-bind='timeEntry.distance')
+        .col-lg-2(ng-bind='timeEntry.time')
+        .col-lg-2(ng-bind='timeEntry.avg_speed')
