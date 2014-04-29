@@ -1,8 +1,11 @@
 class TimeEntriesController < ApplicationController
+  expose(:time_entries){ TimeEntry.scoped }
   expose(:time_entry, attributes: :time_entry_params)
+
   respond_to :html, :json
 
   def index
+    respond_with time_entries
   end
 
   def show
