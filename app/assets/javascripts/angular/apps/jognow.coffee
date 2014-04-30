@@ -1,4 +1,5 @@
-window.app.controller('timeEntriesController', [
+angular.module('Jognow', ['General'])
+.controller('timeEntriesController', [
   '$scope', 'TimeEntry', ($scope, TimeEntry)->
     $scope.timeEntries = TimeEntry.query()
     $scope.create = ->
