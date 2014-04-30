@@ -7,6 +7,7 @@
 #= require angular-strap
 
 #= require_self
+#= require_tree ./angular/services
 #= require_tree ./angular/resources
 #= require_tree ./angular/directives
 #= require angular/apps/jognow

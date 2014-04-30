@@ -20,6 +20,17 @@
         .form-group.col-lg-8.text-right
           %input.btn.btn-primary(type='submit' value='Save')
 
+  .row
+    .col-lg-9
+      %nav.navbar.navbar-default{:role => "navigation"}
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => ""}(ng-click='goLastWeek()') « Last Week
+          %li(ng-repeat='weekDay in week.days')
+            %a(ng-href="#/timesheet/{{ weekDay.year }}/{{ weekDay.month }}/{{ weekDay.day }}")
+              {{ weekDay.name }}
+          %li
+            %a{:href => ""}(ng-click='goNextWeek()') Next Week »
   %ul.row
     %li.col-lg-12
       .row
