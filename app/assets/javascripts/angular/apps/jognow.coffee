@@ -12,9 +12,8 @@ angular.module('Jognow', ['General'])
     })
 ])
 .controller('timeEntriesController', [
-  '$scope', 'TimeEntry', 'Week', ($scope, TimeEntry, Week)->
+  '$scope', 'TimeEntry', ($scope, TimeEntry)->
     $scope.timeEntries = TimeEntry.query()
-    $scope.week = new Week
     $scope.create = ->
       $scope.submitted = true
       return if $scope.form.$invalid
@@ -32,10 +31,4 @@ angular.module('Jognow', ['General'])
     $scope.resetTimeEntry = ->
       $scope.timeEntry = {}
       $scope.form.setPristine()
-
-    $scope.goNextWeek = ->
-      $scope.week.goNextWeek()
-
-    $scope.goLastWeek = ->
-      $scope.week.goLastWeek()
 ])
