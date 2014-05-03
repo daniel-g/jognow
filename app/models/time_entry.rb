@@ -3,12 +3,17 @@ class TimeEntry
   include Mongoid::Timestamps
 
   field :date, type: Date
-  field :time, type: Integer
-  field :distance, type: Integer
+  field :time, type: Float
+  field :distance, type: Float
   field :avg_speed, type: Float
 
   validates :date, presence: true
-  validates :time, presence: true
+  validates :distance, presence: true, numericality: {
+    greater_than: 0
+  }
+  validates :time, presence: true, numericality: {
+    greater_than: 0
+  }
 
   after_validation :calculate_avg_speed
 

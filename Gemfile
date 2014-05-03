@@ -20,4 +20,5 @@ group :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'timecop'
+  gem 'factory_girl_rails'
 end

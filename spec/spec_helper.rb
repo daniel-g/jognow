@@ -9,11 +9,18 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
   config.order = "random"
+  config.include FactoryGirl::Syntax::Methods
   Capybara.javascript_driver = :webkit
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
+    begin
+      DatabaseCleaner.start
+      # FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
+    end
   end
 
   config.around(:each) do |example|
