@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default{:role => "navigation"}
+%nav.navbar.navbar-default{:role => "navigation"}(ng-controller='HeaderController')
   .container-fluid
     .navbar-header
       %button.navbar-toggle{"data-target" => "#main-header", "data-toggle" => "collapse", :type => "button"}
@@ -9,7 +9,7 @@
       %a.navbar-brand{:href => "#"} JogNow
     #main-header.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li.active
+        %li(ng-class='{ active: isActive("/timesheet") }')
           %a{:href => "#/"} Timesheet
-        %li
+        %li(ng-class='{ active: isActive("/reports") }')
           %a{:href => "#/reports"} Reports

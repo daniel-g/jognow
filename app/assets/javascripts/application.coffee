@@ -5,6 +5,7 @@
 #= require angular-resource
 #= require angular-animate
 #= require angular-strap
+#= require angular-strap/dist/angular-strap.tpl
 
 #= require_self
 #= require_tree ./angular/services

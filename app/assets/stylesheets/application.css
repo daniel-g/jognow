@@ -1,5 +1,6 @@
 /*
  *= require bootstrap
+ *= require angular-strap/datepicker
  *= require_tree .
  *= require_self
  */
