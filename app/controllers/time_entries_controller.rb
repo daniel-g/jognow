@@ -5,7 +5,13 @@ class TimeEntriesController < ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with time_entries
+    respond_to do |format|
+      format.json{
+        self.time_entries = TimeEntriesSeach.new(search_params)
+        render json: time_entries
+      }
+      format.html
+    end
   end
 
   def show
@@ -13,7 +19,7 @@ class TimeEntriesController < ApplicationController
 
   def create
     time_entry.save
-    respond_with time_entry
+    respond_with time_entry, location: nil
   end
 
   private
