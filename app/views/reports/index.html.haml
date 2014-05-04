@@ -1,1 +1,36 @@
-Hello Reports
+%div(ng-controller='ReportsController')
+  .row
+    .col-lg-12
+      %form.form-inline(ng-submit='query()' name='searchForm' novalidate)
+        .form-group(ng-class="{ 'has-error': searchForm.from.$invalid }")
+          %label.control-label Filter
+          %input.form-control( type='text'
+            ng-model='search.from'
+            name='from'
+            placeholder='From'
+            bs-datepicker
+            data-date-format='dd/MM/yyyy'
+            data-max-date='{{ search.to }}'
+          )
+        .form-group(ng-class="{ 'has-error': searchForm.to.$invalid }")
+          %input.form-control(type='text'
+            ng-model='search.to'
+            name='to'
+            placeholder='To'
+            bs-datepicker
+            data-date-format='dd/MM/yyyy'
+            data-min-date='{{ search.from }}'
+          )
+  .row
+    .col-lg-12
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Distance
+            %th Average Speed (m/s)
+            %th Average Speed (km/h)
+        %tbody
+          %tr
+            %td(ng-bind='report.distance | distance')
+            %td(ng-bind='report.avg_speed | number:2')
+            %td(ng-bind='report.avg_speed | speedToKmH | number:2')

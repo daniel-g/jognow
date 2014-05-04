@@ -97,3 +97,6 @@ angular.module('Jognow', ['General'])
       return false if $scope.search?.to? && timeEntry.date > $scope.search.to
       true
 ])
+.controller('ReportsController', ['$scope', 'Report', ($scope, Report)->
+  $scope.report = Report.timeEntries()
+])
