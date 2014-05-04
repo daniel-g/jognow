@@ -11,6 +11,7 @@ RSpec.configure do |config|
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
   config.include FactoriesHelpers
+  config.include BecomeTrueMatcher
   Capybara.javascript_driver = :webkit
 
   config.before(:suite) do
@@ -21,6 +22,15 @@ RSpec.configure do |config|
       # FactoryGirl.lint
     ensure
       DatabaseCleaner.clean
+    end
+  end
+
+  config.before :each, type: :feature do |example|
+    if example.metadata[:js]
+      Capybara.current_driver = :webkit
+      if example.metadata[:selenium]
+        Capybara.current_driver = :selenium
+      end
     end
   end
 

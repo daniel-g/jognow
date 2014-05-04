@@ -51,8 +51,10 @@ angular.module('Jognow', ['General'])
 .controller('TimeEntriesController', [
   '$scope', 'TimeEntry', 'TimeEntryPresenter', '$location', ($scope, TimeEntry, TimeEntryPresenter, $location)->
     $scope.timeEntries = TimeEntry.query($location.$$search)
+    today = new Date
+    today.setHours(0,0,0,0)
     $scope.timeEntry = {
-      date: (new Date)
+      date: today
     }
 
     $scope.create = ->

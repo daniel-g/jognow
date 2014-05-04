@@ -13,6 +13,11 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'decent_exposure'
 
+group :development, :test do
+  gem 'pry'
+  gem 'pry-remote'
+end
+
 group :test do
   gem "rspec-rails", "~> 3.0.0.beta2"
   gem "capybara", git: 'https://github.com/jnicklas/capybara'

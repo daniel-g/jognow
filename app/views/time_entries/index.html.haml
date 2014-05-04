@@ -4,7 +4,7 @@
       .row
         .form-group.col-lg-2(ng-class="{ 'has-error': form.date.$invalid && submitted }")
           %label Date
-          %input.form-control(type='text'
+          %input.form-control#date(type='text'
             ng-model='timeEntry.date'
             name='date'
             required bs-datepicker

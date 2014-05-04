@@ -6,7 +6,14 @@ window.app.service('TimeEntry', ['$resource', ($resource)->
       transformResponse: (data, headersGetter)->
         data = JSON.parse(data)
         for timeEntry in data
-          timeEntry.date = new Date(timeEntry.date)
+          timeEntry.date = moment(timeEntry.date).toDate()
+        data
+    }
+    'save': {
+      method:'POST',
+      transformResponse: (data, headersGetter)->
+        data = JSON.parse(data)
+        data.date = moment(data.date).toDate()
         data
     }
   })
