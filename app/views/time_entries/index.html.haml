@@ -4,7 +4,13 @@
       .row
         .form-group.col-lg-2(ng-class="{ 'has-error': form.date.$invalid && submitted }")
           %label Date
-          %input.form-control(type='text' ng-model='timeEntry.date' name='date' required bs-datepicker)
+          %input.form-control(type='text'
+            ng-model='timeEntry.date'
+            name='date'
+            required bs-datepicker
+            data-date-format='dd/MM/yyyy'
+            data-max-date='today'
+          )
           %span.help-block(ng-show='form.date.$error.required && submitted')
             Please fill out this field
         .form-group.col-lg-2(ng-class="{ 'has-error': form.distance.$invalid && submitted }")
@@ -24,6 +30,28 @@
       .row
         .form-group.col-lg-6
           %input.btn.btn-primary(type='submit' value='Save')
+  .row
+    %form.col-lg-12.form-horizontal(ng-submit='query()' name='searchForm' novalidate)
+      .form-group
+        %label.col-sm-1.control-label Filter
+        .col-lg-2(ng-class="{ 'has-error': searchForm.from.$invalid }")
+          %input.form-control( type='text'
+            ng-model='search.from'
+            name='from'
+            placeholder='From'
+            bs-datepicker
+            data-date-format='dd/MM/yyyy'
+            data-max-date='{{ search.to }}'
+          )
+        .col-lg-2(ng-class="{ 'has-error': searchForm.to.$invalid }")
+          %input.form-control(type='text'
+            ng-model='search.to'
+            name='to'
+            placeholder='To'
+            bs-datepicker
+            data-date-format='dd/MM/yyyy'
+            data-min-date='{{ search.from }}'
+          )
   %ul.row
     %li.col-lg-12
       .row
@@ -37,7 +65,7 @@
           %strong Average Speed
     %li.col-lg-12(ng-repeat='timeEntry in timeEntries')
       .row
-        .col-lg-2(ng-bind='timeEntry.date')
+        .col-lg-2(ng-bind='timeEntry.date | date:\'dd/MM/yyyy\'')
         .col-lg-2(ng-bind='timeEntry.distance')
         .col-lg-2(ng-bind='timeEntry.time')
         .col-lg-2(ng-bind='timeEntry.avg_speed')

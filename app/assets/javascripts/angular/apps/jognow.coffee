@@ -4,8 +4,8 @@ angular.module('Jognow', ['General'])
     when('/', {
       redirectTo: '/timesheet'
     }).
-    when('/timesheet/:year?/:month?/:day?', {
-      templateUrl: 'time_entries/show'
+    when('/timesheet', {
+      templateUrl: 'time_entries/'
     }).
     when('/reports', {
       templateUrl: 'reports/'
@@ -49,11 +49,12 @@ angular.module('Jognow', ['General'])
     route == $location.path()
 ])
 .controller('TimeEntriesController', [
-  '$scope', 'TimeEntry', 'TimeEntryPresenter', ($scope, TimeEntry, TimeEntryPresenter)->
-    $scope.timeEntries = TimeEntry.query()
+  '$scope', 'TimeEntry', 'TimeEntryPresenter', '$location', ($scope, TimeEntry, TimeEntryPresenter, $location)->
+    $scope.timeEntries = TimeEntry.query($location.$$search)
     $scope.timeEntry = {
       date: (new Date)
     }
+
     $scope.create = ->
       $scope.submitted = true
       return if $scope.form.$invalid
@@ -62,7 +63,9 @@ angular.module('Jognow', ['General'])
       }, $scope.createSuccess, $scope.createError)
 
     $scope.createSuccess = (response, responseObj)->
-      $scope.timeEntries.push response
+      response.date = new Date(response.date)
+      if $scope.isWithinSearch(response)
+        $scope.timeEntries.push response
       $scope.resetTimeEntry()
 
     $scope.createError = (response)->
@@ -74,4 +77,21 @@ angular.module('Jognow', ['General'])
         date: (new Date)
       }
       $scope.form.$setPristine()
+
+    $scope.$watch('search.from', (newVal, oldVal)->
+      return unless newVal?
+      return if $scope.searchForm.from.$invalid
+      $scope.timeEntries = TimeEntry.query($scope.search)
+    )
+
+    $scope.$watch('search.to', (newVal, oldVal)->
+      return unless newVal?
+      return if $scope.searchForm.to.$invalid
+      $scope.timeEntries = TimeEntry.query($scope.search)
+    )
+
+    $scope.isWithinSearch = (timeEntry)->
+      return false if $scope.search?.from? && timeEntry.date < $scope.search.from
+      return false if $scope.search?.to? && timeEntry.date > $scope.search.to
+      true
 ])

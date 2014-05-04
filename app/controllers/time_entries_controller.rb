@@ -7,7 +7,7 @@ class TimeEntriesController < ApplicationController
   def index
     respond_to do |format|
       format.json{
-        self.time_entries = TimeEntriesSeach.new(search_params)
+        self.time_entries = TimeEntriesSearch.new(search_params).results
         render json: time_entries
       }
       format.html
@@ -31,5 +31,9 @@ class TimeEntriesController < ApplicationController
     params.require(:time_entry).permit(
       :date, :time, :distance
     )
+  end
+
+  def search_params
+    params.permit(:from, :to)
   end
 end

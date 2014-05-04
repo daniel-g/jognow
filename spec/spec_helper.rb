@@ -10,6 +10,7 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 RSpec.configure do |config|
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
+  config.include FactoriesHelpers
   Capybara.javascript_driver = :webkit
 
   config.before(:suite) do

@@ -2,7 +2,7 @@ class TimeEntry
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :date, type: Date
+  field :date, type: DateTime
   field :time, type: Float
   field :distance, type: Float
   field :avg_speed, type: Float
