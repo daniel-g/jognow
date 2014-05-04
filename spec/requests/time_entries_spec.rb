@@ -34,6 +34,24 @@ describe '/time_entries', '#GET' do
     create_time_entries
   end
 
+  it 'looks for time entries registered from a date' do
+    get time_entries_path, { format: :json,
+      from: '16/01/2014'
+    }
+    expect(JSON.parse(response.body)).to eql(
+      JSON.parse([@time_entry_16_01_2014, @time_entry_14_02_2014].to_json)
+    )
+  end
+
+  it 'looks for time entries registered to a date' do
+    get time_entries_path, { format: :json,
+      to: '14/01/2014'
+    }
+    expect(JSON.parse(response.body)).to eql(
+      JSON.parse([@time_entry_14_01_2014].to_json)
+    )
+  end
+
   it 'looks for time entries registered from - to a date' do
     get time_entries_path, { format: :json,
       from: '16/01/2014', to: '14/02/2014'
