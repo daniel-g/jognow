@@ -3,7 +3,7 @@ class ReportsController < ApplicationController
   end
 
   def time_entries
-    render json: TimeEntriesReport.new(search_params).totals
+    render json: TimeEntriesSearch.new(search_params).totals
   end
 
   private
