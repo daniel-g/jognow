@@ -98,5 +98,30 @@ angular.module('Jognow', ['General'])
       true
 ])
 .controller('ReportsController', ['$scope', 'Report', ($scope, Report)->
-  $scope.report = Report.timeEntries()
+  $scope.search = {
+    from: moment().startOf('week').toDate(),
+    to: moment().endOf('week').toDate()
+  }
+
+  $scope.query = ->
+    $scope.report = Report.timeEntries($scope.search)
+  $scope.query()
+
+  $scope.goToLastWeek = ->
+    newFrom = moment($scope.search.from).subtract('w', 1).toDate()
+    newTo = moment($scope.search.to).subtract('w', 1).toDate()
+    $scope.search = {
+      from: newFrom
+      to: newTo
+    }
+    $scope.query()
+
+  $scope.goToNextWeek = ->
+    newFrom = moment($scope.search.from).add('w', 1).toDate()
+    newTo = moment($scope.search.to).add('w', 1).toDate()
+    $scope.search = {
+      from: newFrom
+      to: newTo
+    }
+    $scope.query()
 ])

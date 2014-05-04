@@ -1,26 +1,14 @@
 %div(ng-controller='ReportsController')
   .row
     .col-lg-12
-      %form.form-inline(ng-submit='query()' name='searchForm' novalidate)
-        .form-group(ng-class="{ 'has-error': searchForm.from.$invalid }")
-          %label.control-label Filter
-          %input.form-control( type='text'
-            ng-model='search.from'
-            name='from'
-            placeholder='From'
-            bs-datepicker
-            data-date-format='dd/MM/yyyy'
-            data-max-date='{{ search.to }}'
-          )
-        .form-group(ng-class="{ 'has-error': searchForm.to.$invalid }")
-          %input.form-control(type='text'
-            ng-model='search.to'
-            name='to'
-            placeholder='To'
-            bs-datepicker
-            data-date-format='dd/MM/yyyy'
-            data-min-date='{{ search.from }}'
-          )
+      .btn-group.pull-left
+        %button.btn.btn-default(type='button' ng-click='goToLastWeek()')
+          %span.glyphicon.glyphicon-chevron-left
+        %button.btn.btn-default(type='button' ng-click='goToNextWeek()')
+          %span.glyphicon.glyphicon-chevron-right
+      .lead.col-lg-10
+        Week:
+        %small(ng-cloak) {{ search.from | date:'dd MMM yyyy' }} - {{ search.to | date:'dd MMM yyyy' }}
   .row
     .col-lg-12
       %table.table.table-striped
