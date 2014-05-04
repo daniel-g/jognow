@@ -8,6 +8,7 @@
 #= require angular-strap/dist/angular-strap.tpl
 
 #= require_self
+#= require_tree ./angular/filters
 #= require_tree ./angular/services
 #= require_tree ./angular/resources
 #= require_tree ./angular/directives
