@@ -14,7 +14,7 @@
 #= require_tree ./angular/resources
 #= require_tree ./angular/directives
 #= require angular/apps/timesheet
-#= require angular/apps/login
+#= require angular/apps/authentication
 #= require angular/apps/jognow
 
 window.app = angular.module('General', [

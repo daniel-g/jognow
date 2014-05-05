@@ -1,4 +1,4 @@
-angular.module('Login', ['General'])
+angular.module('Authentication', [])
 .controller('SessionsController', ['$scope', 'Session', ($scope, Session)->
   $scope.create = ->
     $scope.submitted = true

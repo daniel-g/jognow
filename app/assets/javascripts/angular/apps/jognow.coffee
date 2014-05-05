@@ -1,4 +1,4 @@
-angular.module('Jognow', ['Timesheet', 'Login'])
+angular.module('Jognow', ['General', 'Timesheet', 'Authentication'])
 .config(['$routeProvider', ($routeProvider)->
   $routeProvider.
     when('/', {
