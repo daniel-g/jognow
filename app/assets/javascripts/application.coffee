@@ -13,8 +13,9 @@
 #= require_tree ./angular/services
 #= require_tree ./angular/resources
 #= require_tree ./angular/directives
-#= require angular/apps/jognow
+#= require angular/apps/timesheet
 #= require angular/apps/login
+#= require angular/apps/jognow
 
 window.app = angular.module('General', [
   'ngResource', 'ngAnimate', 'ngRoute', 'mgcrea.ngStrap'
