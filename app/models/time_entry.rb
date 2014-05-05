@@ -6,6 +6,7 @@ class TimeEntry
   field :time, type: Float
   field :distance, type: Float
   field :avg_speed, type: Float
+  belongs_to :user
 
   validates :date, presence: true
   validates :distance, presence: true, numericality: {

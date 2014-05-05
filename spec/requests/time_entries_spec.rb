@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe '/time_entries/', '#POST' do
+  let!(:user){ create(:user) }
+  before do
+    login_as user
+  end
+
   it 'creates a time entry' do
     expect{
       post time_entries_path(format: :json), time_entry: {
@@ -14,6 +19,7 @@ describe '/time_entries/', '#POST' do
     expect(@time_entry.distance).to eql(1000.0)
     expect(@time_entry.time).to eql(60*20.0)
     expect(@time_entry.avg_speed).to eql(1000.to_f/(60*20))
+    expect(@time_entry.user).to eql(user)
   end
 
   it 'returns errors if the time entry cannot be created' do
@@ -30,11 +36,15 @@ describe '/time_entries/', '#POST' do
 end
 
 describe '/time_entries', '#GET' do
+  let!(:user){ create(:user) }
+
   before do
-    create_time_entries
+    create_time_entries(user)
+    login_as user
   end
 
-  it 'looks for time entries registered from a date' do
+  it 'looks for time entries of the current user registered from a date' do
+    @extra_time_entry = create(:time_entry, date: Date.new(2014, 2, 14), user: create(:user, email: 'another@doe.com'))
     get time_entries_path, { format: :json,
       from: '16/01/2014'
     }
@@ -43,7 +53,8 @@ describe '/time_entries', '#GET' do
     )
   end
 
-  it 'looks for time entries registered to a date' do
+  it 'looks for the time entries of the current user registered to a date' do
+    @extra_time_entry = create(:time_entry, date: Date.new(2014, 1, 10), user: create(:user, email: 'another@doe.com'))
     get time_entries_path, { format: :json,
       to: '14/01/2014'
     }
@@ -52,7 +63,8 @@ describe '/time_entries', '#GET' do
     )
   end
 
-  it 'looks for time entries registered from - to a date' do
+  it 'looks for time entries of the current user registered from - to a date' do
+    @extra_time_entry = create(:time_entry, date: Date.new(2014, 1, 20), user: create(:user, email: 'another@doe.com'))
     get time_entries_path, { format: :json,
       from: '16/01/2014', to: '14/02/2014'
     }

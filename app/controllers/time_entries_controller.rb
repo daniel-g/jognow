@@ -1,7 +1,7 @@
 class TimeEntriesController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:time_entries){ TimeEntry.scoped }
+  expose(:time_entries, ancestor: :current_user)
   expose(:time_entry, attributes: :time_entry_params)
 
   respond_to :html, :json
@@ -9,7 +9,7 @@ class TimeEntriesController < ApplicationController
   def index
     respond_to do |format|
       format.json{
-        self.time_entries = TimeEntriesSearch.new(search_params).results
+        self.time_entries = TimeEntriesSearch.new(current_user, search_params).results
         render json: time_entries
       }
       format.html

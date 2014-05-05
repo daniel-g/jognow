@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe '/reports' do
   describe '/time_entries', '#GET' do
+    let!(:user){ create(:user) }
+
     before do
-      create_time_entries
+      create_time_entries(user)
       @time_entry_16_01_2014.update_attributes({
         distance: 5,
         time: 1
@@ -12,6 +14,7 @@ describe '/reports' do
         distance: 5,
         time: 1
       })
+      login_as user
     end
 
     it 'reports time entries\'s big numbers from - to a date' do

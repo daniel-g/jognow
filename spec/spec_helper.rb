@@ -12,6 +12,9 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include FactoriesHelpers
   config.include BecomeTrueMatcher
+  config.include Warden::Test::Helpers, type: :feature
+  config.include Warden::Test::Helpers, type: :request
+
   Capybara.javascript_driver = :webkit
 
   config.before(:suite) do
@@ -30,6 +33,15 @@ RSpec.configure do |config|
       Capybara.current_driver = :webkit
       if example.metadata[:selenium]
         Capybara.current_driver = :selenium
+      end
+    end
+  end
+
+  config.after :each do |example|
+    if example.metadata[:type] == :request || example.metadata[:type] == :feature
+      Warden.test_reset!
+      if example.metadata[:js]
+        Capybara.current_driver = :webkit
       end
     end
   end

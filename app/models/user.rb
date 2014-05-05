@@ -35,6 +35,8 @@ class User
   # field :locked_at,       type: Time
   include Mongoid::Timestamps
 
+  has_many :time_entries
+
   class << self
     def serialize_from_session(key, salt)
       record = to_adapter.get(key[0]['$oid'])

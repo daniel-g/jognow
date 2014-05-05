@@ -1,8 +1,15 @@
 require 'spec_helper'
 
 feature 'Track jog time' do
-  scenario 'Entering all the data', :js do
+  let!(:user){ create(:user) }
+
+  before do
+    login_as user
+  end
+
+  scenario 'Entering all the data', :js, :selenium do
     visit root_path
+    binding.pry
     expect(page).to have_content 'Timesheet'
     fill_in_time_data
     click_on 'Save'
@@ -12,6 +19,7 @@ feature 'Track jog time' do
     time = TimeEntry.where(:date => '27/04/2014').first
     expect(time.distance).to eql 3.5 * 1000.0
     expect(time.time).to eql 20*60.0
+    expect(time.user).to eql user
   end
 
   def fill_in_time_data
@@ -23,6 +31,7 @@ feature 'Track jog time' do
   def fill_ng_datepicker id, options
     page.execute_script <<-JS
       var datePicker = $('##{ id }').data();
+      console.log(datePicker.$ngModelController)
       datePicker.$ngModelController.$setViewValue('#{ options[:with] }');
     JS
   end
