@@ -1,8 +1,14 @@
-angular.module('Jognow', ['General'])
+angular.module('Jognow', ['General', 'Login'])
 .config(['$routeProvider', ($routeProvider)->
   $routeProvider.
     when('/', {
-      redirectTo: '/timesheet'
+      controller: 'AppController'
+    }).
+    when('/login', {
+      templateUrl: 'users/sign_in'
+    }).
+    when('/register', {
+      templateUrl: 'users/sign_up'
     }).
     when('/timesheet', {
       templateUrl: 'time_entries/'
@@ -43,6 +49,11 @@ angular.module('Jognow', ['General'])
         distance: MeasuresHelpers.strToMeters(@timeEntry.distance)
         date: @timeEntry.date
       }
+])
+.controller('AppController', ['$rootScope', ($rootScope)->
+  $rootScope.$on("$routeChangeError", (event, current, previous, rejection)->
+    console.log(event)
+  )
 ])
 .controller('HeaderController', ['$scope', '$location', ($scope, $location)->
   $scope.isActive = (route)->

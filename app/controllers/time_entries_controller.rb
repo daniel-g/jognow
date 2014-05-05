@@ -1,4 +1,6 @@
 class TimeEntriesController < ApplicationController
+  before_filter :authenticate_user!
+
   expose(:time_entries){ TimeEntry.scoped }
   expose(:time_entry, attributes: :time_entry_params)
 

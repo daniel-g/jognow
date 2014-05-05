@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default{:role => "navigation"}(ng-controller='HeaderController')
+%nav.navbar.navbar-default{:role => "navigation"}(ng-controller='HeaderController' ng-show='userLoggedIn')
   .container-fluid
     .navbar-header
       %button.navbar-toggle{"data-target" => "#main-header", "data-toggle" => "collapse", :type => "button"}

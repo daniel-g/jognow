@@ -1,0 +1,28 @@
+%div(ng-controller='SessionsController')
+  .row
+    %h2 Sign in
+  .row
+    %form(name='form' novalidate role='form' ng-submit='create()')
+      .form-group
+        %label Email
+        %input(type='text'
+          name='email'
+          ng-model='user.email'
+        )
+      .form-group
+        %label Password
+        %input(type='password'
+          name='password'
+          ng-model='user.password'
+        )
+      .form-group
+        %label
+          %input(type='checkbox'
+            name='remember_me'
+            ng-model='user.remember_me'
+          )
+          Remember Me
+      .form-group
+        %input.btn.btn-primary(type='submit' value='Sign in')
+  .row
+    %a(href='#/register') Register
