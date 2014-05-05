@@ -19,6 +19,4 @@
 
 window.app = angular.module('General', [
   'ngResource', 'ngAnimate', 'ngRoute', 'mgcrea.ngStrap'
-]).config(['$httpProvider', ($httpProvider) ->
-  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ])

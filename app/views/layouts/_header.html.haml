@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default{:role => "navigation"}(ng-controller='HeaderController' ng-show='userLoggedIn')
+%nav.navbar.navbar-default{:role => "navigation"}(ng-controller='HeaderController' ng-show='isUserLoggedIn()')
   .container-fluid
     .navbar-header
       %button.navbar-toggle{"data-target" => "#main-header", "data-toggle" => "collapse", :type => "button"}
@@ -10,6 +10,8 @@
     #main-header.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li(ng-class='{ active: isActive("/timesheet") }')
-          %a{:href => "#/"} Timesheet
+          %a{:href => "#/timesheet"} Timesheet
         %li(ng-class='{ active: isActive("/reports") }')
           %a{:href => "#/reports"} Reports
+        %li
+          %a(ng-click='signOut()' href='') Logout

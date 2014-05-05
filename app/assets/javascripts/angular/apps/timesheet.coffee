@@ -32,9 +32,21 @@ angular.module('Timesheet', [])
         date: @timeEntry.date
       }
 ])
-.controller('HeaderController', ['$scope', '$location', ($scope, $location)->
+.controller('HeaderController', ['$scope', '$location', 'UserService', 'Session', ($scope, $location, UserService, Session)->
   $scope.isActive = (route)->
     route == $location.path()
+
+  $scope.isUserLoggedIn = ->
+    UserService.isLoggedIn
+
+  $scope.signOut = ->
+    session = new Session
+    session.$signOut(
+      (response, responseObj)->
+        UserService.isLoggedIn = false
+        UserService.user = null
+        $location.path('/login')
+    )
 ])
 .controller('TimeEntriesController', ['$scope', 'TimeEntry', 'TimeEntryPresenter', '$location', ($scope, TimeEntry, TimeEntryPresenter, $location)->
   $scope.timeEntries = TimeEntry.query($location.$$search)
