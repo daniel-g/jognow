@@ -9,10 +9,10 @@
 #= require angular-strap/dist/angular-strap.tpl
 
 #= require_self
-#= require_tree ./angular/filters
-#= require_tree ./angular/services
-#= require_tree ./angular/resources
-#= require_tree ./angular/directives
+#= require_tree ./angular/filters/
+#= require_tree ./angular/services/
+#= require_tree ./angular/resources/
+#= require_tree ./angular/directives/
 #= require angular/apps/timesheet
 #= require angular/apps/authentication
 #= require angular/apps/jognow
