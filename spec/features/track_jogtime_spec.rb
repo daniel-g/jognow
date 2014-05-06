@@ -7,9 +7,8 @@ feature 'Track jog time' do
     login_as user
   end
 
-  scenario 'Entering all the data', :js, :selenium do
+  scenario 'Entering all the data', :js do
     visit root_path
-    binding.pry
     expect(page).to have_content 'Timesheet'
     fill_in_time_data
     click_on 'Save'
@@ -31,7 +30,6 @@ feature 'Track jog time' do
   def fill_ng_datepicker id, options
     page.execute_script <<-JS
       var datePicker = $('##{ id }').data();
-      console.log(datePicker.$ngModelController)
       datePicker.$ngModelController.$setViewValue('#{ options[:with] }');
     JS
   end
