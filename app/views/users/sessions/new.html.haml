@@ -3,6 +3,11 @@
     %h2 Sign in
   .row
     %form(name='form' novalidate role='form' ng-submit='create()')
+      .row
+        .col-lg-6.alert.alert-danger.alert-dismissable(ng-show='errors')
+          %button.close{:type => "button"}(ng-click='errors = null') &times;
+          %strong
+            Invalid email or password
       .form-group
         %label Email
         %input(type='text'

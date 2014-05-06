@@ -3,6 +3,7 @@ angular.module('Jognow', ['General', 'Timesheet', 'Authentication'])
   $routeProvider.
     when('/', {
       controller: 'AppController'
+      redirectTo: '/timesheet'
     }).
     when('/login', {
       templateUrl: 'users/sign_in'

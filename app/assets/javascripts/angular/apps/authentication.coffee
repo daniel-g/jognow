@@ -1,5 +1,5 @@
 angular.module('Authentication', [])
-.controller('SessionsController', ['$scope', 'Session', 'UserService', '$alert', '$location', ($scope, Session, UserService, $alert, $location)->
+.controller('SessionsController', ['$scope', 'Session', 'UserService', '$location', ($scope, Session, UserService, $location)->
   $scope.create = ->
     $scope.submitted = true
     return if $scope.form.$invalid
@@ -14,9 +14,9 @@ angular.module('Authentication', [])
     $location.path('/timesheet')
 
   $scope.createError = (response)->
-    $alert({title: 'Error:', content: 'Please try again.', placement: 'top', type: 'info', show: true})
+    $scope.errors = true
 ])
-.controller('RegistrationsController', ['$scope', 'User', 'UserService', '$alert', '$location', ($scope, User, UserService, $alert, $location)->
+.controller('RegistrationsController', ['$scope', 'User', 'UserService', '$location', ($scope, User, UserService, $location)->
   $scope.create = ->
     $scope.submitted = true
     return if $scope.form.$invalid
@@ -31,5 +31,5 @@ angular.module('Authentication', [])
     $location.path('/timesheet')
 
   $scope.createError = (response)->
-    $alert({title: 'Error:', content: 'Please try again.', placement: 'top', type: 'info', show: true})
+    $scope.errors = response.data.errors
 ])
