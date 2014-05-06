@@ -6,7 +6,6 @@ capybara-*.html
 **.orig
 
 config/database.yml
-config/secrets.yml
 
 ## Environment normalisation:
 /.bundle
