@@ -39,6 +39,12 @@ angular.module('Timesheet', [])
   $scope.isUserLoggedIn = ->
     UserService.isLoggedIn
 
+  $scope.username = ->
+    if UserService.user?.first_name? or UserService.user?.last_name?
+      [UserService.user?.first_name, UserService.user?.last_name].join(' ')
+    else
+      UserService.user?.email
+
   $scope.signOut = ->
     session = new Session
     session.$signOut(
