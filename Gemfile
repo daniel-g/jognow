@@ -13,6 +13,8 @@ gem 'spring', group: :development
 gem 'devise'
 gem 'decent_exposure'
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'pry'
   gem 'pry-remote'
