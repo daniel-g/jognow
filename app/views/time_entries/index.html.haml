@@ -11,22 +11,22 @@
             data-date-format='dd/MM/yyyy'
             data-max-date='today'
           )
-          %span.help-block(ng-show='form.date.$error.required && submitted')
-            Please fill out this field
+          %span.help-block(ng-show='form.date.$invalid')
+            Date is invalid. Valid format: dd/mm/yyyy
         .form-group.col-lg-2(ng-class="{ 'has-error': form.distance.$invalid && submitted }")
           %label Distance
           %input.form-control(type='text' placeholder='3.5km, 400m, etc.' ng-model='timeEntry.distance' name='distance' distance required)
           %span.help-block(ng-show='form.distance.$error.required && submitted')
             Please fill out this field
           %span.help-block(ng-show='form.distance.$error.distance && submitted')
-            This is not a valid distance. It should contain a valid number followed by a valid measure unit: km for kilometers or m for meters: 3km, 3.5km, 400m, 120m
+            Distance is not valid. Valid inputs: 3.5km, 400m, 120m
         .form-group.col-lg-2(ng-class="{ 'has-error': form.time.$invalid && submitted }")
           %label Time
           %input.form-control(type='text' placeholder='20 min, 3 hrs, 1 hr' ng-model='timeEntry.time' name='time' required time)
           %span.help-block(ng-show='form.time.$error.required && submitted')
             Please fill out this field
           %span.help-block(ng-show='form.time.$error.time && submitted')
-            This is not a valid time. It should contain a valid number followed by a valid time unit: hrs, hours, m, minutes
+            Time is not valid. Valid inputs: 3 hrs, 3 h, 20 minutes, 10 min
       .row
         .form-group.col-lg-6
           %input.btn.btn-primary(type='submit' value='Save')
