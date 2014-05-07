@@ -1,6 +1,5 @@
 %div(ng-controller='RegistrationsController')
-  .row
-    %h2 Sign up
+  %h2 Registration
   %form.form-horizontal(name='form' novalidate role='form' ng-submit='create()')
     .row
       .col-lg-6.alert.alert-danger.alert-dismissable(ng-show='errors')
@@ -46,15 +45,6 @@
           ng-model='user.password_confirmation'
           placeholder='Password Confirmation'
         )
-    .form-group
-      .col-lg-offset-1.col-lg-6
-        .checkbox
-          %label
-            %input(type='checkbox'
-              name='remember_me'
-              ng-model='user.remember_me'
-            )
-            Remember Me
     .form-group
       .col-lg-offset-1.col-lg-6
         %input.btn.btn-primary(type='submit' value='Sign up')

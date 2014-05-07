@@ -31,7 +31,6 @@ angular.module('Jognow', ['General', 'Timesheet', 'Authentication'])
 .factory('AuthInterceptor', ['UserService', '$location', '$q', (UserService, $location, $q)->
   return {
     responseError: (response)->
-      console.log [401, 403, 419, 440].indexOf(response.status) != -1
       if [401, 403, 419, 440].indexOf(response.status) != -1
         UserService.isLoggedIn = false
         UserService.user = null
